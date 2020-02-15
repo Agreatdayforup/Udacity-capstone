@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Travel App</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+  </head>
+ <body>
+  <div class="row">
+    <div class="col">
+      <div class="leftSide">
+        <div class="formContainer">
+          <div class ="holderDestination">
+            <label for="zip">Enter Destination city here </label>
+            <input type="text" class="dest" placeholder="enter your destination here">
+            <label for="date">Enter date of departure here</label>
+            <input type="date" id="date" placeholder="enter date of departure here">
+          </div>
+    
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="rightSide">
+        <h1 class="resTitle"> Travel Information </h1>
+          <div class="response">
+            <canvas class="icon" width="60" height="60"></canvas>
+            <div id="weathersum"></div>
+            <h2 class="degree">34</h2>
+            <div class="tempDescrip">Its Cold</div>
+            <div id="countDown"></div>
+            <!-- Placeholder for Image of city -->
+            <img class="pixabayImage" src="" id="destImage"></img>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../js/skycons.js"></script>
+  <script src="../js/app.js" type="text/javascript"></script>
+
+</body>
+</html>
