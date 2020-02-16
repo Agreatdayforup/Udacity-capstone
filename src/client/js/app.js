@@ -1,41 +1,65 @@
 
 
 /* Global Variables */
-
-window.addEventListener('load', () => {
-    let long;
-    let lat;
-    let degree = document.querySelector('.degree');
-    let tempDescription = document.querySelector('.tempDescrip');
+const searchForm = document.querySelector('form')
+const cordData = {};
+const geoData = {};
 
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            long = position.coords.longitude;
-            lat = position.coords.latitude;
+let degree = document.querySelector('.degree');
+let tempDescription = document.querySelector('.tempDescrip');
+let date = document.querySelector('#date');
+let city = document.querySelector('.dest');
+    
+// Helps prevent Cors error
+const proxy = 'https://cors-anywhere.herokuapp.com/';
 
-            // Helps prevent Cors error
-            const proxy = 'https://cors-anywhere.herokuapp.com/';
+    
+        
 
-            // GeoNames API information and userName
-            let destCity = document.querySelector('.dest');
-            const geoUser = agreatdayfor
-            const geoNamesApi = `http://api.geonames.org/searchJSON?q=${destCity}&maxRows=10&username=${geoUser}`;
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    console.log('testing')
+    
 
-            // DarkSky API information
-            const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${lat},${long}`;
+    // Destination date for user
+    const destDate = date.value
 
-        // Geonames API Fetch
-        fetch(geoNamesApi)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                const { temperature, summary, icon } = data.currently;
+    // user destination city to store value
+    const destCity = city.value;
+
+            console.log(destCity)
+            console.log(destDate)
+
+    //Geonames APIusername and api address
+    const geoUser = 'agreatdayfor';
+    const geoNamesApi = `http://api.geonames.org/searchJSON?q=${destCity}&maxRows=10&username=${geoUser}`;
+     
+    // Geonames API Fetch
+     fetch(geoNamesApi)
+     .then(response => {
+         return response.json();
+     })
+     .then(data => {
+         console.log(data);
+         const cordData = {
+             lat: data.geonames[0].lat,
+             lon: data.geonames[0].lng,
+         };
+        geoData.coord = cordData;
+    })
+
+    const latit = geoData.lat;
+    const longi = geoData.lon;
+
+    console.log(latit)
+    console.log(longi)
 
 
-        fetch(darkApi)
+    // DarkSky API information
+    const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${latit},${longi}`;
+
+    fetch(darkApi)
             .then(response => {
                 return response.json();
             })
@@ -48,17 +72,22 @@ window.addEventListener('load', () => {
                 // Set Icon
                 setIcons(icon, document.querySelector('.icon'));
             })
-        })
-    }
 
-    // function to change icon to a gif version  from DevED youtube
-    function setIcons(icon, iconID) {
-        const skycons = new Skycons({color: 'white'});
-        const currentIcon = icon.replace(/-/g, '_').toUpperCase();
-        skycons.play();
-        return skycons.set(iconID, Skycons[currentIcon]);
-    }
+             // function to change icon to a gif version  from DevED youtube
+            function setIcons(icon, iconID) {
+                const skycons = new Skycons({color: 'white'});
+                const currentIcon = icon.replace(/-/g, '_').toUpperCase();
+                skycons.play();
+                return skycons.set(iconID, Skycons[currentIcon]);
+            }
+
+
+            
 })
+
+    
+
+
 
 
 // Create a new date instance dynamically with JS
