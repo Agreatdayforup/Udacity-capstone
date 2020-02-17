@@ -3,7 +3,13 @@
 /* Global Variables */
 const searchForm = document.querySelector('form')
 const cordData = {};
-const geoData = {};
+let geoCountry = {};
+let geoCC = {};
+let geoLatit = {};
+let geoLongi = {};
+// let darkTemp = {};
+// let darkSummary = {};
+// let darkIcon = {};
 
 
 let degree = document.querySelector('.degree');
@@ -15,19 +21,17 @@ let resCityTitle = document.querySelector('.resCity')
 // Helps prevent Cors error
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 
-    
-        
+// Destination date for user
+    const destDate = date.value
+// Destination city for user
+    const destCity = city.value;
+
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault()
     console.log('testing')
-    
+   
 
-    // Destination date for user
-    const destDate = date.value
-
-    // user destination city to store value
-    const destCity = city.value;
     resCityTitle.textContent = `The Weather for your trip to ${destCity} on ${destDate} will be!`
             console.log(destCity)
             console.log(destDate)
@@ -42,33 +46,29 @@ searchForm.addEventListener('submit', (e) => {
          return response.json();
      })
      .then(data => {
-         console.log(data);
-         const cordData = {
-             lat: data.geonames[0].lat,
-             lon: data.geonames[0].lng,
-             country: data.genames[0].countryName,
-             countryCode: data.genames[0].countryCode
-         };
-        geoData.coord = cordData;
+            geoLatit = data.geonames[0].lat;
+            geoLongi = data.geonames[0].lng;
+            geoCountry = data.geonames[0].countryName;
+            geoCC = data.geonames[0].countryCode;
+        
+        
+        console.log(geoLatit)
+        console.log(geoLongi)
+        console.log(data);
     })
-
-    const latit = geoData.lat;
-    const longi = geoData.lon;
-
-    console.log(latit)
-    console.log(longi)
 
 
     // DarkSky API information
-    const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${latit},${longi},${destDate}`;
+    const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${geoLatit},${geoLongi}`;
 
     fetch(darkApi)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                //console.log(data);
+                console.log(data);
                 const { temperature, summary, icon } = data.currently;
+
                 //set Dom from API
                 degree.textContent = temperature;
                 tempDescription.textContent = summary;
@@ -84,9 +84,9 @@ searchForm.addEventListener('submit', (e) => {
                 return skycons.set(iconID, Skycons[currentIcon]);
             }
 
-
-            
 })
+            
+
 
     
 
