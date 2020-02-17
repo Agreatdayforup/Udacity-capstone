@@ -10,6 +10,7 @@ let degree = document.querySelector('.degree');
 let tempDescription = document.querySelector('.tempDescrip');
 let date = document.querySelector('#date');
 let city = document.querySelector('.dest');
+let resCityTitle = document.querySelector('.resCity')
     
 // Helps prevent Cors error
 const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -27,7 +28,7 @@ searchForm.addEventListener('submit', (e) => {
 
     // user destination city to store value
     const destCity = city.value;
-
+    resCityTitle.textContent = `The Weather for your trip to ${destCity} on ${destDate} will be!`
             console.log(destCity)
             console.log(destDate)
 
@@ -45,6 +46,8 @@ searchForm.addEventListener('submit', (e) => {
          const cordData = {
              lat: data.geonames[0].lat,
              lon: data.geonames[0].lng,
+             country: data.genames[0].countryName,
+             countryCode: data.genames[0].countryCode
          };
         geoData.coord = cordData;
     })
@@ -57,14 +60,14 @@ searchForm.addEventListener('submit', (e) => {
 
 
     // DarkSky API information
-    const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${latit},${longi}`;
+    const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${latit},${longi},${destDate}`;
 
     fetch(darkApi)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 const { temperature, summary, icon } = data.currently;
                 //set Dom from API
                 degree.textContent = temperature;

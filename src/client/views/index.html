@@ -11,12 +11,13 @@
     <div class="col">
       <div class="leftSide">
         <div class="formContainer">
-          <div class ="holderDestination">
+          <form>
             <label for="zip">Enter Destination city here </label>
             <input type="text" class="dest" placeholder="enter your destination here">
             <label for="date">Enter date of departure here</label>
             <input type="date" id="date" placeholder="enter date of departure here">
-          </div>
+            <button id="generate" type="submit">Submit</button>
+          </form>
     
       </div>
     </div>
@@ -25,10 +26,12 @@
       <div class="rightSide">
         <h1 class="resTitle"> Travel Information </h1>
           <div class="response">
-            <canvas class="icon" width="60" height="60"></canvas>
-            <div id="weathersum"></div>
-            <h2 class="degree">34</h2>
-            <div class="tempDescrip">Its Cold</div>
+            <h2 class="resCity"></h2>
+              <div id="weathersum">
+                <canvas class="icon" width="60" height="60"></canvas>
+                <h2 class="degree">34</h2>
+                <div class="tempDescrip">Its Cold</div>
+              </div>
             <div id="countDown"></div>
             <!-- Placeholder for Image of city -->
             <img class="pixabayImage" src="" id="destImage"></img>

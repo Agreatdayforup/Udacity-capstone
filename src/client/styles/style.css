@@ -45,8 +45,14 @@ p {
 .formContainer {
     padding: 20% 25%;
 }
+
 .response {
     padding: 5% 50%;
+}
+
+.resCity {
+    width: 250px;
+    padding: 5% 30px;
 }
 
 @media screen and (max-width:414px) {
