@@ -1,5 +1,3 @@
-
-
 /* Global Variables */
 const searchForm = document.querySelector('form')
 const cordData = {};
@@ -7,7 +5,9 @@ let geoCountry = {};
 let geoCC = {};
 let geoLatit = {};
 let geoLongi = {};
-let pixaData = document.querySelector('.pixabayImage');
+let pixaData = {};
+let countryData = {};
+
 
 
 let degree = document.querySelector('.degree');
@@ -68,6 +68,8 @@ searchForm.addEventListener('submit', (e) => {
         console.log(geoLatit)
         console.log(geoLongi)
         console.log(data);
+        console.log(geoCC);
+        console.log(geoCountry);
 
      return fetch(`${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${geoLatit},${geoLongi}`).then(response => {
             return response.json();
@@ -87,12 +89,24 @@ searchForm.addEventListener('submit', (e) => {
             const pixaKey = '14937162-57809441d2782a1b475398b82';
             const pixabayApi = `https://pixabay.com/api/?key=${pixaKey}&q=${destCity}&orientation=horizontal`
 
-            fetch(pixabayApi)
+            return fetch(pixabayApi)
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                document.getElementById('.response').style.backgroundImage = data.largeImageURL;
+                console.log(data.hits[0].largeImageURL);
+                pixaData = data.hits[0].largeImageURL;
+                document.getElementById("resImg").style.backgroundImage = `url(${pixaData})`;
+                
+                const restCountry = `https://restcountries.eu/rest/v2/alpha/${geoCC}`
+
+                return fetch(restCountry)
+                .then(response => {
+                    return response.json();
+                }).then(data => {
+                    countryData = data.population;
+                    console.log(countryData);
+                })
             })
             
             // function to change icon to a gif version  from DevED youtube
