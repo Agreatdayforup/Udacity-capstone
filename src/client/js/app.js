@@ -7,6 +7,10 @@ let geoLatit = {};
 let geoLongi = {};
 let pixaData = {};
 let countryData = {};
+let countryCurr = {};
+let countryReg = {};
+let countryLang = {};
+
 
 
 
@@ -105,6 +109,11 @@ searchForm.addEventListener('submit', (e) => {
                     return response.json();
                 }).then(data => {
                     countryData = data.population;
+                    countryCurr = data.currencies[0].name;
+                    countryReg = data.region;
+                    countryLang = data.languages[0].name;
+
+                    console.log(countryLang);
                     console.log(countryData);
                 })
             })
@@ -119,35 +128,6 @@ searchForm.addEventListener('submit', (e) => {
     })
         
     })
-
-    
-    
- 
-
-
-            
-
-
-    
-
-
-
-
-// Create a new date instance dynamically with JS
-// let d = new Date();
-// let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-
-   //             // Pixabay API Information
-    // const pixaKey = '14937162-57809441d2782a1b475398b82';
-    // const pixabayApi = `https://pixabay.com/api/?key=${pixaKey}&q=${destCity}&orientation=horizontal`
-
-    // fetch(pixabayApi)
-    //  .then(response => {
-    //      return response.json();
-    //  })
-    //  .then(data => {
-    //     document.getElementById(".response").style.backgroundImage = data.largeImageURL;
-            
 
 
 })
