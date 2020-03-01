@@ -17,27 +17,36 @@ let countryLang = {};
 let degree = document.querySelector('.degree');
 let tempDescription = document.querySelector('.tempDescrip');
 let date = document.querySelector('#date');
+const tripDate = date.value;
 let city = document.querySelector('.dest');
-let resCityTitle = document.querySelector('.resCity')
+let resCityTitle = document.querySelector('.resCity');
+const bodyBack = document.getElementById("bodyMain");
     
+// Destination date for user
+
+const destDate = new Date(date.value).getTime()/10000;
+console.log(destDate)
+// Destination city for user
+const destCity = city.value;
 
 
-// darkAPI function
 
-//const getDarkSky = (geoLatit, geoLongi) => {
+// Helps prevent Cors error
+const proxy = 'https://cors-anywhere.herokuapp.com/';
 
-    // Helps prevent Cors error
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
 
     // DarkSky API information
     const darkApi = `${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${geoLatit},${geoLongi}`;
 
+    //Geonames APIusername and api address
+    const geoUser = 'agreatdayfor';
+    const geoNamesApi = `http://api.geonames.org/searchJSON?q=${destCity}&maxRows=1&username=${geoUser}`;
+
+    // Pixabay API Information
+    const pixaKey = '14937162-57809441d2782a1b475398b82';
+    const pixabayApi = `https://pixabay.com/api/?key=${pixaKey}&q=${destCity}&orientation=horizontal`
 
 
-// Destination date for user
-    const destDate = date.value
-// Destination city for user
-    const destCity = city.value;
 
 //form submittion with API Requests inside
 
@@ -47,15 +56,11 @@ searchForm.addEventListener('submit', (e) => {
     console.log('testing')
    
 
-    resCityTitle.textContent = `The current weather in ${destCity} is!`
+    resCityTitle.textContent = `The weather in ${destCity} for ${tripDate} is!`
             console.log(destCity)
             console.log(destDate)
 
 
-
-    //Geonames APIusername and api address
-    const geoUser = 'agreatdayfor';
-    const geoNamesApi = `http://api.geonames.org/searchJSON?q=${destCity}&maxRows=1&username=${geoUser}`;
      
 // Geonames API Fetch
      fetch(geoNamesApi)
@@ -75,48 +80,49 @@ searchForm.addEventListener('submit', (e) => {
         console.log(geoCC);
         console.log(geoCountry);
 
-     return fetch(`${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${geoLatit},${geoLongi}`).then(response => {
+     return fetch(`${proxy}https://api.darksky.net/forecast/1469add55d2500c04eddbd73805930c6/${geoLatit},${geoLongi}`)
+        .then(response => {
             return response.json();
-        
+            
         }).then(data => {
             console.log(data);
-            const { temperature, summary, icon } = data.currently;
+            let { temperature, summary, icon } = data.currently;
             
             //set Dom from API
-            degree.textContent = temperature;
+            degree.textContent = temperature + "-F";
             tempDescription.textContent = summary;
             // Set Icon
             setIcons(icon, document.querySelector('.icon'));
 
 
-            // Pixabay API Information
-            const pixaKey = '14937162-57809441d2782a1b475398b82';
-            const pixabayApi = `https://pixabay.com/api/?key=${pixaKey}&q=${destCity}&orientation=horizontal`
+            
 
             return fetch(pixabayApi)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                console.log(data.hits[0].largeImageURL);
-                pixaData = data.hits[0].largeImageURL;
-                document.getElementById("resImg").style.backgroundImage = `url(${pixaData})`;
-                
-                const restCountry = `https://restcountries.eu/rest/v2/alpha/${geoCC}`
-
-                return fetch(restCountry)
                 .then(response => {
                     return response.json();
-                }).then(data => {
-                    countryData = data.population;
-                    countryCurr = data.currencies[0].name;
-                    countryReg = data.region;
-                    countryLang = data.languages[0].name;
-
-                    console.log(countryLang);
-                    console.log(countryData);
                 })
-            })
+                .then(data => {
+                    console.log(data.hits[0].largeImageURL);
+                    pixaData = data.hits[0].largeImageURL;
+                    document.getElementById("resImg").style.backgroundImage = `url(${pixaData})`;
+                    
+                    
+                    const restCountry = `https://restcountries.eu/rest/v2/alpha/${geoCC}`
+
+                    return fetch(restCountry)
+                    .then(response => {
+                        return response.json();
+                    }).then(data => {
+                        countryData = data.population;
+                        countryCurr = data.currencies[0].name;
+                        countryReg = data.region;
+                        countryLang = data.languages[0].name;
+
+                        document.getElementById("countryDes").innerHTML = geoCountry + "'s population is " + countryData + ", there currency is the " + countryCurr + " and the language spoken is " + countryLang;
+                        console.log(countryLang);
+                        console.log(countryData);
+                    })
+                })
             
             // function to change icon to a gif version  from DevED youtube
             function setIcons(icon, iconID) {
@@ -129,5 +135,27 @@ searchForm.addEventListener('submit', (e) => {
         
     })
 
+
+
+var countDownDate = destDate;
+    // Update the count down every 1 second
+let x = setInterval(function() {
+
+    // Get today's date and time
+    let now = new Date().getTime()/100;
+    
+    // Find the differance from today to the trip date
+    let distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result 
+    document.getElementById("countDown").innerHTML = days + "d's " + " till your trip departs";
+  
+  }, 1000);
 
 })

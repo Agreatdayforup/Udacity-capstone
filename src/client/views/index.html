@@ -1,42 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
     <title>Travel App</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
   </head>
- <body>
+ <body id="bodyMain">
   <div class="row">
+    <h1 class="mainTitle">Travel Planner</h1>
     <div class="col">
       <div class="leftSide">
         <div class="formContainer">
-          <form>
+          <form class="">
             <label for="zip">Enter Destination city here </label>
             <input type="text" class="dest" placeholder="enter your destination here">
             <label for="date">Enter date of departure here</label>
-            <input type="date" id="date" placeholder="enter date of departure here">
+            <input type="date" data-date="" data-date-format="MM-DD-YYYY" id="date" placeholder="enter date of departure here">
+            <!--<input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">-->
             <button id="generate" type="submit">Submit</button>
           </form>
-    
+          <button onClick="window.location.href=window.location.href">New Trip</button>
       </div>
     </div>
 
     <div class="col">
       <div class="rightSide">
+        <div class="resContainer">
         <h1 class="resTitle"> Travel Information </h1>
-          <div class="response">
+          <div class="response" id="resImg">
             <h2 class="resCity"></h2>
               <div id="weathersum">
                 <canvas class="icon" width="60" height="60"></canvas>
-                <h2 class="degree">34</h2>
-                <div class="tempDescrip">Its Cold</div>
+                <h2 class="degree"></h2>
+                <div class="tempDescrip"></div>
+                <div id="countryDes"></div>
               </div>
             <div id="countDown"></div>
-            <!-- Placeholder for Image of city -->
-            <img class="pixabayImage" src="" id="destImage"></img>
-          </div>
       </div>
+    </div>
     </div>
 
   </div>
