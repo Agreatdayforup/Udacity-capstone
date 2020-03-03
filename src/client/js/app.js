@@ -1,3 +1,5 @@
+
+
 /* Global Variables */
 const searchForm = document.querySelector('form')
 const cordData = {};
@@ -50,9 +52,11 @@ const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 //form submittion with API Requests inside
 
-//function handleSubmit(event) {
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+
+function handleSubmit(event) {
+    event.preventDefault()
+// searchForm.addEventListener('submit', (e) => {
+//     e.preventDefault()
     console.log('testing')
    
 
@@ -104,8 +108,10 @@ searchForm.addEventListener('submit', (e) => {
                 .then(data => {
                     console.log(data.hits[0].largeImageURL);
                     pixaData = data.hits[0].largeImageURL;
-                    document.getElementById("resImg").style.backgroundImage = `url(${pixaData})`;
-                    
+                    let pixaImg = document.getElementById("resImg");
+                    pixaImg.style.backgroundImage = `url(${pixaData})`;
+                    pixaImg.style.filter = 'grayscale(75%)';
+                    pixaImg.style.opacity = '0.8';
                     
                     const restCountry = `https://restcountries.eu/rest/v2/alpha/${geoCC}`
 
@@ -158,4 +164,6 @@ let x = setInterval(function() {
   
   }, 1000);
 
-})
+}
+
+//export { handleSubmit }
