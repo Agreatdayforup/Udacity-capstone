@@ -1,10 +1,55 @@
-# Weather-Journal App Project
+# Project Instructions
 
-## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+The goal of this project is to practice working with:
+- Setting up Webpack
+- Sass styles
+- Webpack Loaders and Plugins
+- Creating layouts and page design
+- Service workers
+- Using chaining muliple APIs and creating requests to external urls
 
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+
+
+## Getting started
+
+`cd` into your new folder and run:
+- `npm install`
+
+## Install Dependencies
+    "body-parser"
+    "clean-webpack-plugin"
+    "cors" 
+    "express"
+    "nodemon"
+    "parser"
+    "path"
+    "request"
+    "require"
+    "validator"
+
+## devDependencies, Webpack modules and rules
+    "@babel/core"
+    "@babel/preset-env"
+    "babel-loader"
+    "css-loader"
+    "file-loader"
+    "html-loader"
+    "html-webpack-plugin"
+    "jest"
+    "mini-css-extract-plugin"
+    "node-sass"
+    "sass-loader"
+    "style-loader"
+    "webpack"
+    "webpack-cli"
+    "webpack-dev-server"
+    "webpack-merge"
+    "workbox-webpack-plugin"
+
+## Set up a Webpack common, dev and production environment
+
+![alternativetext](subfolder/screenShot.png)
+
+
+
