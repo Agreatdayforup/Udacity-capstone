@@ -30,4 +30,18 @@ function timer(date) {
   }, 1000);
 }
 
+
+
+
+
+function sum(a, b) {
+  return a + b
+}
+
+
+
+
 export {timer};
+
+
+module.exports = sum;

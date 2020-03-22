@@ -2,11 +2,8 @@
 import {timer} from './timer';
 
 
-
-const addFunctions = {
-    add: (num1, num2) => num1 + num2
-  }
-
+  
+  
 
 /* Global Variables */
     const searchForm = document.querySelector('form')
@@ -38,13 +35,13 @@ const addFunctions = {
     const bodyBack = document.getElementById("bodyMain");
     
 // Destination date for user
-    const destDate = date.value;
+    let destDate = date.value;
     console.log(destDate)
     
 
 
 // Destination city for user
-    const destCity = city.value;
+    let destCity = city.value;
 
 
 // Helps prevent Cors error
@@ -144,4 +141,3 @@ searchForm.addEventListener('submit', (event) => {
 });
 
 
-module.exports = addFunctions;
