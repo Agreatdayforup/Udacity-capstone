@@ -2,8 +2,7 @@
 import {timer} from './timer';
 
 
-  
-  
+ 
 
 /* Global Variables */
     const searchForm = document.querySelector('form')
@@ -139,5 +138,7 @@ searchForm.addEventListener('submit', (event) => {
     timer(destDate)
     
 });
+
+
 
 

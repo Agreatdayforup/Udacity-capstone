@@ -14,13 +14,13 @@
     <div class="leftSide">
       <div class="formContainer">
         <div>
-          <form class="form" onsubmit="return Client.handleSubmit(event)" >
+          <form class="form">
             <label for="zip">Enter Destination city here </label>
-            <input type="text" class="dest" placeholder="enter your destination here">
+            <input type="text" class="dest" id="dest" placeholder="enter your destination here">
             <label for="date">Enter date of departure here</label>
             <input type="date" data-date="" data-date-format="MM-DD-YYYY" id="date" placeholder="enter date of departure here">
-            <input class="myButton" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)" >
-            <!--<button class="myButton" id="generate" type="submit">Submit</button>-->
+            <!--<input class="myButton" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)" >-->
+            <button class="myButton" id="generate" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -43,7 +43,7 @@
   </div>
     <script>
        // Check that service workers are supported
-       
+       // TEST
         if ('serviceWorker' in navigator) {
           // Use the window load event to keep the page load performant
           window.addEventListener('load', () => {
