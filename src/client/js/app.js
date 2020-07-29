@@ -50,7 +50,7 @@ import {timer} from './timer';
     
     // Geonames APIusername and api address
     const geoUser = 'agreatdayfor';
-    const geoNamesApi = `http://api.geonames.org/searchJSON?q=${destCity}&maxRows=1&username=${geoUser}`;
+    const geoNamesApi = `https://api.geonames.org/searchJSON?q=${destCity}&maxRows=1&username=${geoUser}`;
 
     // Pixabay API Information
     const pixaKey = '14937162-57809441d2782a1b475398b82';
