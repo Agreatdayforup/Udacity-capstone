@@ -1,10 +1,10 @@
 console.log('the client side is loaded');
 
 // import program
-import {timer} from "./client/js/timer.js";
+import {timer} from "./client/js/timer";
 
 //eventListener import
-import './client/js/app.js';
+import './client/js/app';
 
 // import Styles
 import './client/styles/main.scss';
